@@ -23,20 +23,23 @@ vector<int> Solution::plusOne(vector<int> &A) {
     int i;
     i=A.size()-1;
     
-    if(A[i]<9){
+    if(A[i]<9){     // Direct addition as number < 9
         A[i]++;
     }
     else
     {
-        A[i]=0;
-        if(i == 0){
-            A.insert(A.begin(), 1);
-        }
-        else{
-            A[i-1]++;
-        }
-        i--;
-        while(A[i] >= 10){
+        do{                  // Here carry will generate as number >9 
+            A[i]=0;
+            if(i == 0){
+                A.insert(A.begin(), 1);
+            }
+            else{
+                A[i-1]++;
+            }
+            i--;
+        }while(A[i] >= 10);
+        
+        /*{
             A[i] = 0;
             if(i == 0){
                 A.insert(A.begin(), 1);
@@ -46,9 +49,9 @@ vector<int> Solution::plusOne(vector<int> &A) {
                 A[i-1]++;
             }
             i--;
-        }
+        }*/
     }
-    while(*A.begin() == 0){
+    while(*A.begin() == 0){   // Nullifying zeros before most significant digit / start of vector as per output needed.
         A.erase(A.begin());
     }
 
